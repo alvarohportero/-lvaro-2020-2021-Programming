@@ -12,7 +12,7 @@ def f(a, b, c, d):
         t3 = 2 * (t0 / t1)
         return t0 + 2 * t1 + t3 * t3
     except ZeroDivisionError:
-        print("cannot calculate this")
+        print("cannot")
 
 
 
