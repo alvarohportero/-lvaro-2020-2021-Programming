@@ -1,1 +1,5 @@
 print("Hello")
+print("this is my program")
+print("page 1")
+print("page 2")
+print("page 3")
