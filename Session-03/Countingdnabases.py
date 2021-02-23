@@ -4,11 +4,6 @@ def correct_sequence(dna):
             return False
     return True
 
-
-
-
-
-
 def count_bases(dna):
     a,c,g,t = 0, 0, 0, 0
     for h in dna:
