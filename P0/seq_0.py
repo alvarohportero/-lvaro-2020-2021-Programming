@@ -37,3 +37,5 @@ def seq_count(seq):
 def seq_count_base(seq, base):
     return seq.count(base)
 
+def seq_reverse(seq):
+    return seq[::-1]

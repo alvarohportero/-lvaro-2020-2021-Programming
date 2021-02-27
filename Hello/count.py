@@ -1,2 +1,6 @@
-for i in range(1, 21):
-    print(i, end=" ")
+def seq_reverse(seq):
+    return seq[::-1]
+
+
+hello = seq_reverse("seq")
+print(hello)
