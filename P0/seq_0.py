@@ -39,3 +39,17 @@ def seq_count_base(seq, base):
 
 def seq_reverse(seq):
     return seq[::-1]
+
+def seq_complement(seq):
+    list = []
+    for gene in seq:
+        if gene == "A":
+            list.append("T")
+        elif gene == "T":
+            list.append("C")
+        elif gene == "C":
+            list.append("T")
+        else:
+            list.append("G")
+    convert = "".join(list)
+    return convert
