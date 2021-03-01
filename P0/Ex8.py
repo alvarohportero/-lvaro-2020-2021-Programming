@@ -13,6 +13,4 @@ for gene in gene_list:
         counting = seq_0.seq_count_base(sequence, base)
         if counting >= result:
             result = counting
-    print("Gene", gene,":  Most frequent Base:", base)
-
-
+    print("Gene", gene, ":  Most frequent Base:", base)
