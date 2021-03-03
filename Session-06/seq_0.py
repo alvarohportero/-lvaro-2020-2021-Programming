@@ -71,7 +71,6 @@ class Seq:
         self.strbases = strbases
         # Initialize the sequence with the value
         # passed as argument when creating the object
-        self.strbases = strbases
         if self.is_valid_sequence_2(strbases):
             print("New sequence created")
             self.strbases = strbases

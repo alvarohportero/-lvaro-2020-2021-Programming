@@ -1,0 +1,7 @@
+from seq_0 import Seq
+
+# WE CREATE FUNCTIONS INSIDE THE CLASS WHEN WE ARE GOING TO WORK WITH THE ATTRIBUTES OF THE SEQUENCE ITSELF
+
+seq_list = [Seq("ACT"), Seq("GATA"), Seq("CAGATA")]
+
+Seq.print_seqs(seq_list)
