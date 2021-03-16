@@ -1,6 +1,6 @@
 from seq import Seq
 
-print("-------Exercise 3-------")
+print("-------Exercise 4-------")
 s1 = Seq()
 s3 = Seq("Invalid sequence")
 s2 = Seq("ACTGA")
