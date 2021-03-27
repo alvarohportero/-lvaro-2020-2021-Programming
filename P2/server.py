@@ -1,6 +1,6 @@
 import socket
 
-PORT = 9992
+PORT = 9999
 IP = ""  # IP LOCAL POR DEFECTO
 MAX_OPEN_REQUESTS = 5  # cd para añadir carpeta    # python server.py para inicialiarlo por ejemplo
 

@@ -1,5 +1,5 @@
 import socket
-
+#import termcolor
 
 class Client:
     def __init__(self, ip, port):
@@ -17,8 +17,10 @@ class Client:
             s.close()
         except ConnectionRefusedError:
             print("Couldnt connect to the server. Is it running? HAve you check the ip and port?")
+
     def __str__(self):
         return f"Connection to server at {self.ip}, port : {self.port}"
+
     def talk(self, msg):
         # -- Create the socket
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -34,3 +36,6 @@ class Client:
         # Return the response
         return f"From server : {response}"
 
+    """def debug_talk(self, colored):
+        result = colored.talk
+        termcolor.cprint(green, result)"""
