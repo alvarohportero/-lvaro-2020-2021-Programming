@@ -12,8 +12,8 @@ print("Test of the PING method...")
 response = c.talk("PING")
 print(response)
 
-print("Tes of GET...")
-seq = c.talk(("GET 0"))
+print("Test of GET...")
+seq = c.talk("GET 0")
 print(f"GET 0 : {seq}")
 response = c.talk("GET 1")
 print(f"GET 1 : {response}")
@@ -66,9 +66,3 @@ print()
 print("GENE RNU_269P")
 response = c.talk("GENE FXN")
 print(response)
-
-
-
-
-
-

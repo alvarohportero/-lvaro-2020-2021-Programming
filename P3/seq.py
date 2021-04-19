@@ -5,20 +5,19 @@ class Seq:
     CORRECT_BASES = ["A", "T", "C", "G"]
     BASES_COMPLEMENTS = {"A": "T", "T": "A", "C": "G", "G": "C"}
 
-
     def __init__(self, bases="NULL"):
         if bases == "NULL":
             print("NULL sequence created!")
-        else:
-            for base in bases:
-                if base not in Seq.CORRECT_BASES:
-                    print("INVALID sequence created!")
-                    self.bases = "ERROR"
-                    return
+            self.bases = bases
+            return
 
-            print("New sequence created!")
-
+        for d in bases:
+            if d not in Seq.CORRECT_BASES:
+                self.bases = "ERROR"
+                print("INVALID sequence created!")
+                return
         self.bases = bases
+        print("New sequence created!")
 
     def __str__(self):
         return self.bases
@@ -37,8 +36,7 @@ class Seq:
     def count(self):
         bases_dict = {}
         for base in Seq.CORRECT_BASES:
-            bases_dict[base] = self.count_base(
-                base)  # en el dic bases_dict, le estoy poniendo de clave:base y valor : self..
+            bases_dict[base] = self.count_base(base)
         return bases_dict
 
     def reverse_mode(self):
@@ -60,6 +58,7 @@ class Seq:
         self.bases = ""
         for line in file_content_without_end_of_line_character[1:]:  # el
             self.bases += line
+
     def info(self):
         result = f"Sequence: {self} \n"
         result += f"Total length:{self.len()}\n"
@@ -68,10 +67,8 @@ class Seq:
             if count == 0:
                 result += f"{base} : {count} (0%) \n"
             else:
-                result += f"{base}: {count} ({'{:.1f}'.format(count * 100) / self.len())}%)\n"
+                result += f"{base}: {count} ({'{:.1f}'.format((count * 100) / self.len())}%)\n"
                 return result
-
-
 
 
 class Gene(Seq):
