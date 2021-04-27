@@ -45,7 +45,7 @@ def process_client(s):
     header = "Content-Type: text/html\n"
     # we could include the filenotofounderror
     if path_name == "/":
-        body = read_html_file(HTML_ASSETS + "INDEX.html")
+        body = read_html_file(HTML_ASSETS + "index.html")
     elif path_name == "/info/A":
         body = read_html_file(HTML_ASSETS + "A.html")
     elif path_name == "/info/C":
@@ -55,7 +55,7 @@ def process_client(s):
     elif path_name == "/info/G":
         body = read_html_file(HTML_ASSETS + "G.html")
     else:
-        body = read_html_file((HTML_ASSETS + "ERROR.html"))
+        body = read_html_file((HTML_ASSETS + "error.html"))
 
     # -- Add the Content-Length
     header += f"Content-Length: {len(body)}\n"
