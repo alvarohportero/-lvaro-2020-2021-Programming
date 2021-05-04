@@ -39,7 +39,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             else:
                 contents = read_html_file(HTML_ASSETS + "error.html")
         except FileNotFoundError:
-            contents = read_html_file(HTML_ASSETS + "error.html")
+            contents = read_html_file(HTML_ASSETS + "./html/error.html")
 
         # Generating the response message
         self.send_response(200)  # -- Status line: OK!

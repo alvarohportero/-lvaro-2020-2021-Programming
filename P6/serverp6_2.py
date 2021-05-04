@@ -1,22 +1,16 @@
 import http.server
 import socketserver
 import termcolor
-import pathlib
-import jinja2
-
-
-def read_html_file(filename):
-    content = pathlib.Path(filename).read_text()
-    return content
-
-
-def read_template_html_file(filename):
-    content = jinja2.Template(pathlib.Path(filename).read_text())
-    return content
-
+from urllib.parse import urlparse, parse_qs
+from seq import Seq
+import server_utils as su
 
 # Define the Server's port
-PORT = 8080
+PORT = 8080  # previous one was 6123
+
+LIST_SEQUENCES = [Seq("ATTATATTA"), Seq("CATCATGAT"), Seq("TTTTTTT"), Seq("CCC"), Seq("TGGGTGGG")]
+
+LIST_GENES = ["ADA", "FRAT1", "FNX", "RNU6_269P", "U5"]
 
 BASES_INFORMATION = {
     "A": {"link": "https://es.wikipedia.org/wiki/Adenina",
@@ -49,7 +43,7 @@ socketserver.TCPServer.allow_reuse_address = True
 # It means that our class inheritates all his methods and properties
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
-    def do_get(self):
+    def do_GET(self):
         """This method is called whenever the client invokes the GET method
         in the HTTP protocol request"""
 
@@ -57,43 +51,52 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         termcolor.cprint(self.requestline, 'green')
         termcolor.cprint(self.path, 'blue')
 
+        o = urlparse(self.path)
+        path_name = o.path
+        arguments = parse_qs(o.query)
+        print("Resource requested: ", path_name)
+        print("Parameters:", arguments)
+
         # IN this simple server version:
         # We are NOT processing the client's request
         # It is a happy server: It always returns a message saying
         # that everything is ok
-
-        # Message to send back to the clinet
-        # info/C.html --> works as the file is in ./html/info/C.html
-        # index.html ---> work as the file is in ./html/index.html
-        # /info/index.html ---> error because the file index.html i not found there
-        if self.path == "/":
-            contents = read_html_file("./html/index.html").render()
-        elif "/info/" in self.path:
-            base = self.path.split("/")[-1]
-            context = BASES_INFORMATION[base]
-            context["letter"] = base
-            contents = read_template_html_file("./html/general.html").render(base_information=context)
-        elif self.path.endswith(".html"):
-            try:
-                contents = read_html_file("./html" + self.path)
-            except FileNotFoundError:
-                contents = read_html_file("./html/error.html")
+        context = {}
+        if path_name == "/":
+            context["n_sequences"] = len(LIST_SEQUENCES)
+            context["list_genes"] = LIST_GENES
+            contents = su.read_template_html_file("./html/index.html").render(context=context)
+        elif path_name == "/test":
+            contents = su.read_template_html_file("./html/test.html").render()
+        elif path_name == "/ping":
+            contents = su.read_template_html_file("./html/ping.html").render()
+        elif path_name == "/get":
+            number_sequence = arguments["sequence"][0]
+            contents = su.get(LIST_SEQUENCES, number_sequence)
+        elif path_name == "/operation":
+            sequence = arguments["sequence"][0]
+            operation = arguments["sequence"][0]
+            if operation == "info":
+                contents = su.info(sequence)
+            elif operation == "comp":
+                contents = su.comp(sequence)
+            else:
+                contents = su.rev(sequence)
+        elif path_name == "/gene":
+            gene = arguments["gene"][0]
+            contents = su.gene(gene)
         else:
-            contents = read_html_file("./html/error.html")
+            contents = su.read_template_html_file("./html/error.html").render()
 
         # Generating the response message
         self.send_response(200)  # -- Status line: OK!
-
         # Define the content-type header:
         self.send_header('Content-Type', 'text/html')
-        self.send_header('Content-Length', len(contents.encode()))
-
+        self.send_header('Content-Length', str(len(contents.encode())))
         # The header is finished
         self.end_headers()
-
         # Send the response message
         self.wfile.write(contents.encode())
-
         return
 
 
