@@ -10,5 +10,6 @@
     {% for base, count in context.seq.count().items(): %}
       <p>{{base}}: {{count}} ({{context.seq.percentage_base(base)}}%)</p>
     {% endfor %}
+    <a href="/">Main page</a>
   </body>
 </html>
