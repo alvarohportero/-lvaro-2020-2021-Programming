@@ -1,4 +1,4 @@
-import http.server
+import http.server                    # Nota, el problema esta en el path, html, etc, revisar
 import socketserver
 import termcolor
 from pathlib import Path
@@ -6,7 +6,7 @@ from pathlib import Path
 # Define the Server's port
 PORT = 8080
 
-HTML_ASSETS = "html/"
+HTML_ASSETS = "./html/"
 
 
 def read_html_file(filename):
@@ -21,7 +21,7 @@ socketserver.TCPServer.allow_reuse_address = True
 # It means that our class inheritates all his methods and properties
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
-    def do_get(self):
+    def do_GET(self):
         """This method is called whenever the client invokes the GET method
         in the HTTP protocol request"""
 
@@ -39,24 +39,22 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # index.html ---> work as the file is in ./html/index.html
         # /info/index.html ---> error because the file index.html i not found there
         if self.path == "/":
-
-            contents = read_html_file(".html/index.html")
-
+            contents = read_html_file(HTML_ASSETS + "index.html")
         elif self.path == "/infoA/":
-            contents = read_html_file("./html/info/A.html")
+            contents = read_html_file(HTML_ASSETS + "info/A.html")
         elif self.path == "/infoC/":
-            contents = read_html_file("./html/info/C.html")
+            contents = read_html_file(HTML_ASSETS + "info/C.html")
         elif self.path == "/infoT/":
-            contents = read_html_file("./html/info/T.html")
+            contents = read_html_file(HTML_ASSETS + "info/T.html")
         elif self.path == "/infoG/":
-            contents = read_html_file("./html/info/G.html")
+            contents = read_html_file(HTML_ASSETS + "info/G.html")
         elif self.path.endswith(".html"):
             try:
-                contents = read_html_file("./html" + self.path)
+                contents = read_html_file(HTML_ASSETS + self.path)
             except FileNotFoundError:
-                contents = read_html_file("./html.error")
+                contents = read_html_file(HTML_ASSETS + "error.html")
         else:
-            contents = read_html_file("./html.error.html")
+            contents = read_html_file(HTML_ASSETS + "error.html")
 
         # Generating the response message
         self.send_response(200)  # -- Status line: OK!

@@ -1,4 +1,4 @@
-from Client0 import Client
+from Hello.Client0 import Client
 from seq import Seq
 
 PRACTICE = 2

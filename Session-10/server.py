@@ -70,6 +70,6 @@ while True:
         # -- Close the data socket
         cs.close()
         if count_connections == 5:
-            for i in range(0, len(client_address_list))
+            for i in range(0, len(client_address_list)):
                 print("Client" + str(i) + ".client Ip, PORT" + str(client_address_list[i]))
             exit(0)

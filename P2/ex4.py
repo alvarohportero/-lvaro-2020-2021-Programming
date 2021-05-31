@@ -1,5 +1,5 @@
-from Client0 import Client
-import termcolor
+from Hello.Client0 import Client
+
 PRACTICE = 2
 EXERCISE = 3
 

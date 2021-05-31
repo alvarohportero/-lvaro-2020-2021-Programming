@@ -1,6 +1,6 @@
 import socket
 
-PORT = 9992  # servidor
+PORT = 8080  # servidor
 IP = "127.0.0.1"  # SERVIDOR
 
 my_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

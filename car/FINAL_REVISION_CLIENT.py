@@ -1,18 +1,16 @@
-from Client0 import Client
+from FINAL_REVISION_CLIENT_CLASS import Client
 
 IP = "127.0.0.1"
 PORT = 8080
 
-print("-----| Practice 3|------")
-
 c = Client(IP, PORT)
 print(c)
 
-print("* TesT of  PING...")
+print("* Testing PING...")
 response = c.talk("PING")
 print(response)
 
-print("* Test of  GET...")
+print("* Testing GET...")
 seq = c.talk("GET 0")
 print(f"GET 0: {seq}")
 response = c.talk("GET 1")
@@ -30,17 +28,17 @@ print("* Testing INFO...")
 response = c.talk(f"INFO {seq}")
 print(response)
 
-print("* Test of  COMP...")
+print("* Testing COMP...")
 print(f"COMP {seq}")
 response = c.talk(f"COMP {seq}")
 print(response)
 
-print("* Test of  REV...")
+print("* Testing REV...")
 print(f"REV {seq}")
 response = c.talk(f"REV {seq}")
 print(response)
 
-print("* Test of  GENE...")
+print("* Testing GENE...")
 print("GENE U5")
 response = c.talk("GENE U5")
 print(response)
