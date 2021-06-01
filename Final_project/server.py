@@ -97,6 +97,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         self.send_header('Content-Length', str(len(contents.encode())))
         self.end_headers()
         self.wfile.write(contents.encode())
+        print(contents)
 
 
 handler = TestHandler
